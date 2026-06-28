@@ -284,7 +284,7 @@ function buildArcanaGrid() {
 
     el.innerHTML = `
       <div class="arcana-card-frame">
-        <img src="cards/${card.name}.png" alt="${card.name}" loading="lazy" onerror="this.parentElement.classList.add('img-error')">
+        <img src="cards/${card.name}.webp" alt="${card.name}" loading="lazy" onerror="this.parentElement.classList.add('img-error')">
         <div class="arcana-card-overlay">
           <div class="arcana-card-number">${card.roman}</div>
           <div class="arcana-card-name">${card.name.toUpperCase()}</div>
@@ -304,7 +304,7 @@ function openReading(card) {
   const section = document.getElementById("reading-section");
   const overlay = document.getElementById("modal-overlay");
 
-  document.getElementById("reading-card-img").src = "cards/" + card.name + ".png";
+  document.getElementById("reading-card-img").src = "cards/" + card.name + ".webp";
   document.getElementById("reading-card-img").alt = card.name;
   document.getElementById("reading-card-number").textContent = card.roman;
   document.getElementById("reading-title").textContent = card.name.toUpperCase();
@@ -374,7 +374,7 @@ function drawSpread() {
   slots.forEach((slot, i) => {
     setTimeout(() => {
       const el = document.getElementById(slot.id);
-      el.innerHTML = `<img src="cards/${slot.card.name}.png" alt="${slot.card.name}" style="animation-delay:0s">`;
+      el.innerHTML = `<img src="cards/${slot.card.name}.webp" alt="${slot.card.name}" style="animation-delay:0s">`;
       el.classList.add("has-card");
     }, i * 400);
   });
@@ -392,17 +392,17 @@ function showSpreadReading() {
   readingEl.innerHTML = `
     <div class="spread-cards-row">
       <div class="spread-card-mini">
-        <img src="cards/${past.name}.png" alt="${past.name}">
+        <img src="cards/${past.name}.webp" alt="${past.name}">
         <div class="spread-card-mini-name">${past.name.toUpperCase()}</div>
         <div class="spread-card-mini-pos">PAST</div>
       </div>
       <div class="spread-card-mini">
-        <img src="cards/${present.name}.png" alt="${present.name}">
+        <img src="cards/${present.name}.webp" alt="${present.name}">
         <div class="spread-card-mini-name">${present.name.toUpperCase()}</div>
         <div class="spread-card-mini-pos">PRESENT</div>
       </div>
       <div class="spread-card-mini">
-        <img src="cards/${future.name}.png" alt="${future.name}">
+        <img src="cards/${future.name}.webp" alt="${future.name}">
         <div class="spread-card-mini-name">${future.name.toUpperCase()}</div>
         <div class="spread-card-mini-pos">FUTURE</div>
       </div>
