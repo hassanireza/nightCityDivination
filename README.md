@@ -1,5 +1,5 @@
 # ARCANA - Night City Tarot
-![ARCANA Screenshot](banner.png)
+![ARCANA Screenshot](./assets/banner.webp)
 
 A cyberpunk-inspired Major Arcana tarot experience built as a zero-dependency static web application. Drawing inspiration from the atmosphere and symbolism of Night City, ARCANA combines traditional tarot archetypes with futuristic design, immersive visual effects, and interactive card readings.
 
