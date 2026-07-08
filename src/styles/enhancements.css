@@ -1,0 +1,319 @@
+/* ---------------------------------------------------------------------
+   Enhancements layered on top of base.css for the React rebuild.
+   Covers: search input, orientation badges, card of the day banner,
+   reading history drawer, focus visibility, and reduced motion support.
+   --------------------------------------------------------------------- */
+
+.is-visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Search field alongside the path filter pills */
+.arcana-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.arcana-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.arcana-search input {
+  width: 220px;
+  padding: 9px 16px 9px 36px;
+  background: rgba(154, 163, 156, 0.03);
+  border: 1px solid rgba(154, 163, 156, 0.15);
+  color: var(--text-primary);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.arcana-search input:focus {
+  border-color: rgba(154, 163, 156, 0.5);
+  background: rgba(154, 163, 156, 0.06);
+}
+
+.arcana-search input::placeholder {
+  color: var(--text-dim);
+}
+
+.arcana-search-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--text-dim);
+  font-size: 13px;
+  pointer-events: none;
+}
+
+.arcana-empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-dim);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  grid-column: 1 / -1;
+}
+
+/* Orientation badge shown on drawn cards (upright vs reversed) */
+.orientation-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  margin-bottom: 12px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  border: 1px solid rgba(154, 163, 156, 0.3);
+  color: var(--gold);
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  width: fit-content;
+}
+
+.orientation-badge.is-reversed {
+  color: var(--neon-red);
+  border-color: rgba(110, 61, 53, 0.3);
+}
+
+.reading-card-frame.is-reversed img {
+  transform: rotate(180deg);
+}
+
+.spread-card-slot img.is-reversed {
+  transform: rotate(180deg);
+}
+
+/* Card of the day banner on the hero */
+.daily-card-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 22px;
+  margin-bottom: 28px;
+  border: 1px solid rgba(70, 86, 79, 0.25);
+  background: rgba(70, 86, 79, 0.05);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--neon-purple);
+  cursor: pointer;
+  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.daily-card-banner:hover {
+  background: rgba(70, 86, 79, 0.1);
+  border-color: rgba(70, 86, 79, 0.5);
+}
+
+.daily-card-banner strong {
+  color: var(--gold-light);
+}
+
+/* Reading history journal drawer */
+.history-trigger {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 150;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: rgba(10, 14, 24, 0.9);
+  border: 1px solid rgba(154, 163, 156, 0.25);
+  color: var(--gold);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  backdrop-filter: blur(8px);
+  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  transition: all 0.3s;
+}
+
+.history-trigger:hover {
+  border-color: rgba(154, 163, 156, 0.6);
+  background: rgba(154, 163, 156, 0.08);
+}
+
+.history-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--dark-0);
+  font-size: 10px;
+}
+
+.history-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 400;
+  width: min(420px, 100vw);
+  background: linear-gradient(135deg, var(--dark-1) 0%, var(--dark-2) 100%);
+  border-left: 1px solid rgba(154, 163, 156, 0.2);
+  padding: 32px 28px;
+  overflow-y: auto;
+  animation: history-slide-in 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes history-slide-in {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.history-title {
+  font-family: 'Cinzel', serif;
+  font-size: 20px;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+}
+
+.history-close {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.history-close:hover { color: var(--neon-red); }
+
+.history-clear {
+  display: block;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--text-secondary);
+  border: 1px solid rgba(154, 163, 156, 0.15);
+  background: transparent;
+  transition: all 0.3s;
+}
+
+.history-clear:hover {
+  color: var(--neon-red);
+  border-color: rgba(110, 61, 53, 0.3);
+}
+
+.history-empty {
+  color: var(--text-dim);
+  font-size: 13px;
+  text-align: center;
+  padding: 40px 0;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.history-entry {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px;
+  border: 1px solid rgba(154, 163, 156, 0.1);
+  background: rgba(154, 163, 156, 0.02);
+}
+
+.history-entry img {
+  width: 42px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 3px;
+  border: 1px solid rgba(154, 163, 156, 0.2);
+}
+
+.history-entry-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.history-entry-name {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.history-entry-detail {
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+.history-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 390;
+  background: rgba(2, 4, 8, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+/* Reduced motion support: honor OS level preference across the board */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .history-trigger {
+    bottom: 16px;
+    right: 16px;
+    padding: 10px 16px;
+    font-size: 10px;
+  }
+  .history-drawer {
+    width: 100vw;
+    padding: 24px 20px;
+  }
+}
