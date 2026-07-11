@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { DrawnCard, SPREAD_POSITIONS } from '@/models/ArcanaDeck';
 import { CardOrientation } from '@/models/ArcanaCard';
 import { useFocusTrap } from '@/hooks/useFocusTrap';
+import { CardImage } from '@/components/common/CardImage';
 
 interface SpreadModalProps {
   onClose: () => void;
@@ -55,10 +56,12 @@ export function SpreadModal({ onClose, onDraw }: SpreadModalProps): JSX.Element 
                 <div className={`spread-card-slot${drawn ? ' has-card' : ''}`}>
                   <div className="slot-glow" />
                   {drawn ? (
-                    <img
-                      src={drawn.card.imageSrc}
+                    <CardImage
+                      avifSrc={drawn.card.avifSrc}
+                      webpSrc={drawn.card.webpSrc}
                       alt={drawn.card.name}
                       className={isReversed ? 'is-reversed' : ''}
+                      loading="eager"
                     />
                   ) : (
                     <div className="slot-icon">?</div>
@@ -84,7 +87,11 @@ export function SpreadModal({ onClose, onDraw }: SpreadModalProps): JSX.Element 
             <div className="spread-cards-row">
               {SPREAD_POSITIONS.map((pos) => (
                 <div className="spread-card-mini" key={pos.key}>
-                  <img src={result[pos.key].card.imageSrc} alt={result[pos.key].card.name} />
+                  <CardImage
+                    avifSrc={result[pos.key].card.avifSrc}
+                    webpSrc={result[pos.key].card.webpSrc}
+                    alt={result[pos.key].card.name}
+                  />
                   <div className="spread-card-mini-name">{result[pos.key].card.displayName}</div>
                   <div className="spread-card-mini-pos">{pos.label}</div>
                 </div>

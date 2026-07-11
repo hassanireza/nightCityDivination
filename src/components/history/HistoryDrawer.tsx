@@ -3,6 +3,7 @@ import { ArcanaDeck } from '@/models/ArcanaDeck';
 import { JournalEntry } from '@/models/ReadingHistory';
 import { CardOrientation } from '@/models/ArcanaCard';
 import { useFocusTrap } from '@/hooks/useFocusTrap';
+import { CardImage } from '@/components/common/CardImage';
 
 interface HistoryDrawerProps {
   entries: readonly JournalEntry[];
@@ -64,7 +65,9 @@ export function HistoryDrawer({ entries, deck, onClose, onClear }: HistoryDrawer
               const card = deck.findById(entry.cardId);
               return (
                 <div className="history-entry" key={entry.id}>
-                  {card && <img src={card.imageSrc} alt={entry.cardName} />}
+                  {card && (
+                    <CardImage avifSrc={card.avifSrc} webpSrc={card.webpSrc} alt={entry.cardName} />
+                  )}
                   <div className="history-entry-meta">
                     <div className="history-entry-name">
                       {entry.cardName}

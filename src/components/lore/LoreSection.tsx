@@ -1,5 +1,6 @@
 import { ArcanaCard } from '@/models/ArcanaCard';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { CardImage } from '@/components/common/CardImage';
 
 interface LoreSectionProps {
   empress: ArcanaCard;
@@ -40,13 +41,13 @@ export function LoreSection({ empress, highPriestess, emperor }: LoreSectionProp
         <div className="lore-visual-side">
           <div className="lore-card-stack">
             <div className="lore-card lore-card-3">
-              <img src={empress.imageSrc} alt="" />
+              <CardImage avifSrc={empress.avifSrc} webpSrc={empress.webpSrc} alt="" />
             </div>
             <div className="lore-card lore-card-2">
-              <img src={highPriestess.imageSrc} alt="" />
+              <CardImage avifSrc={highPriestess.avifSrc} webpSrc={highPriestess.webpSrc} alt="" />
             </div>
             <div className="lore-card lore-card-1">
-              <img src={emperor.imageSrc} alt="" />
+              <CardImage avifSrc={emperor.avifSrc} webpSrc={emperor.webpSrc} alt="" />
             </div>
           </div>
           <div className="lore-card-glow" />

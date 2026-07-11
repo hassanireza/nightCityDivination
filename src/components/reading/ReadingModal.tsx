@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { ArcanaCard, CardOrientation } from '@/models/ArcanaCard';
 import { useFocusTrap } from '@/hooks/useFocusTrap';
+import { CardImage } from '@/components/common/CardImage';
 
 interface ReadingModalProps {
   card: ArcanaCard;
@@ -43,7 +44,7 @@ export function ReadingModal({
             <div className="reading-card-display">
               <div className="reading-card-wrap">
                 <div className={`reading-card-frame${isReversed ? ' is-reversed' : ''}`}>
-                  <img src={card.imageSrc} alt={card.name} />
+                  <CardImage avifSrc={card.avifSrc} webpSrc={card.webpSrc} alt={card.name} loading="eager" />
                   <div
                     className="reading-card-glow"
                     style={{ background: `radial-gradient(circle, ${card.glow} 0%, transparent 70%)` }}

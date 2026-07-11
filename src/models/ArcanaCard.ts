@@ -56,9 +56,24 @@ export class ArcanaCard {
     this.keywords = seed.keywords;
   }
 
-  /** Path relative to the public directory used for the card artwork. */
+  /** Path (no extension) relative to the public directory used for the card artwork. */
+  private get imageBase(): string {
+    return `${import.meta.env.BASE_URL}cards/${this.name}`;
+  }
+
+  /** Modern AVIF source. Falls back to WebP where AVIF isn't available/supported. */
+  public get avifSrc(): string {
+    return `${this.imageBase}.avif`;
+  }
+
+  /** WebP source, used as the fallback format and as the <img src> for older browsers. */
+  public get webpSrc(): string {
+    return `${this.imageBase}.webp`;
+  }
+
+  /** @deprecated kept for backward compatibility — prefer webpSrc/avifSrc via <CardImage>. */
   public get imageSrc(): string {
-    return `${import.meta.env.BASE_URL}cards/${this.name}.webp`;
+    return this.webpSrc;
   }
 
   public get displayName(): string {

@@ -1,4 +1,5 @@
 import { ArcanaCard } from '@/models/ArcanaCard';
+import { CardImage } from '@/components/common/CardImage';
 
 interface ArcanaCardTileProps {
   card: ArcanaCard;
@@ -16,7 +17,7 @@ export function ArcanaCardTile({ card, index, onSelect }: ArcanaCardTileProps): 
       aria-label={`Reveal reading for ${card.name}`}
     >
       <div className="arcana-card-frame">
-        <img src={card.imageSrc} alt={card.name} loading="lazy" />
+        <CardImage avifSrc={card.avifSrc} webpSrc={card.webpSrc} alt={card.name} loading="lazy" />
         <div className="arcana-card-overlay">
           <div className="arcana-card-number">{card.roman}</div>
           <div className="arcana-card-name">{card.displayName}</div>

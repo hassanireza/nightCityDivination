@@ -1,0 +1,329 @@
+/* ---------------------------------------------------------------------
+   Mobile-first responsive layer.
+   Loaded after base.css and enhancements.css so it can override them.
+   Breakpoints: 1024 (tablet), 768 (large phone / small tablet),
+   600 (phone), 400 (small phone).
+   --------------------------------------------------------------------- */
+
+/* Prevent any layout from creating horizontal scroll on small screens */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Respect device notches / home indicators */
+@supports (padding: max(0px)) {
+  .nav-bar {
+    padding-left: max(48px, env(safe-area-inset-left));
+    padding-right: max(48px, env(safe-area-inset-right));
+  }
+  .history-trigger {
+    bottom: max(28px, env(safe-area-inset-bottom));
+  }
+}
+
+/* Better tap feedback, no sticky grey highlight on touch */
+a, button, input, .arcana-card, .filter-btn, .history-trigger {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* -----------------------------------------------------------------
+   Hamburger menu (built for the NavBar mobile-menu markup)
+   ----------------------------------------------------------------- */
+.nav-menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  z-index: 210;
+}
+
+.nav-menu-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--gold);
+  transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+}
+
+.nav-menu-toggle.is-active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+  width: 100%;
+}
+.nav-menu-toggle.is-active span:nth-child(2) { opacity: 0; }
+.nav-menu-toggle.is-active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+  width: 100%;
+}
+
+.nav-status-mobile { display: none; }
+
+.nav-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 190;
+  background: rgba(2,4,8,0.6);
+  backdrop-filter: blur(2px);
+}
+
+/* -----------------------------------------------------------------
+   1024px — tablets
+   ----------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .nav-bar { padding: 14px 32px; }
+  .lore-card-stack { height: 340px; }
+  .reading-card-frame img,
+  .reading-card-frame picture img { width: 220px; }
+  .aspect-grid { gap: 12px; }
+}
+
+/* -----------------------------------------------------------------
+   768px — large phones / small tablets
+   ----------------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* --- Nav --- */
+  .nav-bar {
+    padding: 14px 20px;
+    flex-wrap: wrap;
+  }
+
+  .nav-menu-toggle { display: flex; }
+
+  .nav-logo-sub { display: none; }
+
+  .nav-status { display: none; }
+
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: min(78vw, 320px);
+    padding: 96px 28px 32px;
+    background: linear-gradient(160deg, var(--dark-1) 0%, var(--dark-2) 100%);
+    border-left: 1px solid rgba(154,163,156,0.15);
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+    z-index: 205;
+  }
+
+  .nav-links.is-open { transform: translateX(0); }
+
+  .nav-links .nav-link {
+    padding: 16px 0;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(154,163,156,0.08);
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-status-mobile {
+    display: flex;
+    margin-top: 24px;
+  }
+
+  /* --- Hero --- */
+  .hero {
+    padding: 100px 20px 64px;
+    min-height: 100svh;
+  }
+
+  .hero-eyebrow { gap: 12px; margin-bottom: 18px; }
+  .eyebrow-line { width: 32px; }
+  .eyebrow-text { font-size: 9px; letter-spacing: 0.2em; }
+
+  .title-main { font-size: clamp(38px, 12vw, 60px); }
+  .title-jp { font-size: 11px; }
+
+  .hero-subtitle { font-size: 14px; max-width: 100%; margin-bottom: 28px; }
+
+  .daily-card-banner {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    padding: 12px 16px;
+    font-size: 10px;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 36px;
+  }
+
+  .btn-primary, .btn-secondary {
+    width: 100%;
+    justify-content: center;
+    padding: 15px 24px;
+    min-height: 48px;
+  }
+
+  .hero-meta { gap: 20px; }
+  .meta-val { font-size: 22px; }
+  .meta-label { font-size: 9px; }
+
+  .hero-scroll-hint { bottom: 20px; }
+  .scroll-line { width: 28px; }
+
+  /* --- Section divider --- */
+  .section-divider { padding: 28px 20px; }
+  .divider-symbol { padding: 0 16px; font-size: 10px; gap: 8px; }
+
+  /* --- Arcana grid --- */
+  .arcana-grid-section { padding: 0 20px 48px; }
+  .section-title { font-size: clamp(24px, 6vw, 32px); }
+  .section-desc { font-size: 14px; }
+
+  .arcana-toolbar { gap: 12px; margin-bottom: 32px; }
+  .arcana-filter { gap: 6px; width: 100%; }
+  .filter-btn {
+    padding: 10px 16px;
+    font-size: 9px;
+    min-height: 40px;
+    flex: 1 1 auto;
+  }
+
+  .arcana-search { width: 100%; }
+  .arcana-search input { width: 100%; min-height: 40px; }
+
+  .arcana-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .arcana-card-name { font-size: 10px; }
+  .arcana-card-label { font-size: 10px; }
+
+  /* Card art has a real hover state driven by mouse — soften it into a
+     simple press state on touch so cards don't look "stuck" mid-animation. */
+  .arcana-card:active { transform: translateY(-4px) scale(1.02); }
+
+  /* --- Reading modal --- */
+  .reading-section { padding: 20px 12px; align-items: flex-end; }
+  .reading-container {
+    padding: 28px 20px 24px;
+    max-height: 92svh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .reading-close { top: 14px; right: 16px; font-size: 10px; }
+
+  .reading-layout { gap: 24px; }
+  .reading-card-frame img, .reading-card-frame picture img { width: 180px; }
+  .reading-card-number { font-size: 36px; }
+
+  .reading-title { font-size: 26px; }
+  .reading-subtitle { font-size: 12px; margin-bottom: 24px; }
+  .oracle-text { font-size: 14px; }
+  .aspect-grid { grid-template-columns: 1fr; gap: 10px; }
+  .reading-actions { flex-direction: column; }
+  .reading-actions .btn-primary,
+  .reading-actions .btn-secondary { width: 100%; }
+
+  /* --- Spread modal --- */
+  .spread-section { padding: 88px 16px 32px; overflow-y: auto; }
+  .spread-close { top: 14px; right: 16px; font-size: 10px; }
+  .spread-title-area { margin-bottom: 28px; }
+
+  .spread-layout { gap: 20px; }
+  .spread-card-slot { width: 108px; height: 180px; }
+  .spread-position-center .spread-card-slot { width: 128px; height: 213px; }
+  .spread-label { font-size: 10px; margin-top: 10px; }
+  .spread-label span { font-size: 9px; }
+
+  .spread-reading { padding: 18px; }
+  .spread-cards-row { gap: 14px; }
+  .spread-card-mini img,
+  .spread-card-mini picture img { width: 76px; }
+  .spread-summary { font-size: 13px; }
+
+  /* --- Lore --- */
+  .lore-section { padding: 56px 20px; }
+  .lore-title { font-size: clamp(24px, 7vw, 34px); }
+  .lore-body { font-size: 14px; }
+  .lore-content { gap: 40px; }
+  .lore-card-stack { height: 260px; }
+  .lore-card img, .lore-card picture img { width: 140px; }
+
+  /* --- Footer --- */
+  .footer { padding: 28px 20px 24px; }
+  .footer-top { flex-direction: column; align-items: flex-start; gap: 8px; }
+
+  /* --- History drawer --- */
+  .history-trigger {
+    bottom: 16px;
+    right: 16px;
+    padding: 12px 16px;
+    font-size: 10px;
+    min-height: 44px;
+  }
+  .history-drawer { width: 100vw; padding: 24px 20px; }
+  .history-entry { padding: 10px; }
+}
+
+/* -----------------------------------------------------------------
+   600px — phones
+   ----------------------------------------------------------------- */
+@media (max-width: 600px) {
+  .hero { padding: 92px 16px 56px; }
+  .title-main { font-size: clamp(34px, 13vw, 50px); }
+  .hero-meta { flex-wrap: wrap; row-gap: 12px; }
+
+  .arcana-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+
+  .spread-layout {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .spread-position-center { order: -1; flex-basis: 100%; }
+
+  .reading-layout { grid-template-columns: 1fr; }
+  .reading-card-display { margin-bottom: 4px; }
+}
+
+/* -----------------------------------------------------------------
+   400px — small phones
+   ----------------------------------------------------------------- */
+@media (max-width: 400px) {
+  .nav-logo-text { font-size: 12px; }
+  .title-main { font-size: clamp(30px, 14vw, 42px); }
+  .hero-subtitle { font-size: 13px; }
+
+  .arcana-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .filter-btn { font-size: 8px; padding: 9px 12px; }
+
+  .spread-card-slot { width: 92px; height: 153px; }
+  .spread-position-center .spread-card-slot { width: 108px; height: 180px; }
+}
+
+/* -----------------------------------------------------------------
+   Landscape phones — the fixed-height hero can crush content when the
+   viewport is short, so let it size to content instead.
+   ----------------------------------------------------------------- */
+@media (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
+  .hero { min-height: auto; padding: 88px 24px 48px; }
+  .hero-cards-showcase { display: none; }
+}
+
+/* -----------------------------------------------------------------
+   Coarse pointers (touch): the hero's parallax cards are driven by
+   mousemove and never trigger, so no extra rule is needed there; but
+   hover-only affordances that rely on :hover should show their
+   resting state instead of requiring a hover that will never come.
+   ----------------------------------------------------------------- */
+@media (hover: none) and (pointer: coarse) {
+  .arcana-card-overlay { opacity: 1; background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.85) 100%); }
+  .nav-link::after { display: none; }
+}

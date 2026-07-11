@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { ArcanaCard } from '@/models/ArcanaCard';
 import { useTypewriter } from '@/hooks/useTypewriter';
+import { CardImage } from '@/components/common/CardImage';
 
 interface HeroProps {
   leftCard: ArcanaCard;
@@ -124,7 +125,7 @@ export function Hero({
 
       <div className="hero-cards-showcase" aria-hidden="true">
         <div className="showcase-card showcase-card-left" ref={leftRef}>
-          <img src={leftCard.imageSrc} alt="" />
+          <CardImage avifSrc={leftCard.avifSrc} webpSrc={leftCard.webpSrc} alt="" loading="eager" />
           <div className="card-glow card-glow-blue" />
         </div>
         <div className="showcase-card showcase-card-center" id="hero-center-card">
@@ -138,13 +139,13 @@ export function Hero({
               </div>
             </div>
             <div className="card-front">
-              <img src={centerCard.imageSrc} alt="" />
+              <CardImage avifSrc={centerCard.avifSrc} webpSrc={centerCard.webpSrc} alt="" loading="eager" />
             </div>
           </div>
           <div className="card-glow card-glow-purple" />
         </div>
         <div className="showcase-card showcase-card-right" ref={rightRef}>
-          <img src={rightCard.imageSrc} alt="" />
+          <CardImage avifSrc={rightCard.avifSrc} webpSrc={rightCard.webpSrc} alt="" loading="eager" />
           <div className="card-glow card-glow-red" />
         </div>
       </div>
